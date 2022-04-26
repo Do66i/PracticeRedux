@@ -1,38 +1,18 @@
-import { createStore } from "redux";
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+const ul = document.querySelector("ul");
 
-const add = document.getElementById("add");
-const minus = document.getElementById("minus");
-const number = document.querySelector("span");
-
-const reducer = (count = 0, action) => {
-  // data의 modifier = reducer
-  if (action.type === "ADD") {
-    // 전송한 msg의 action을 췍
-    console.log("만약 'ADD'가 실행된다면 도토잠보를 보여주세요 🐘");
-    return ++count;
-  } else if (action.type === "MINUS") {
-    console.log("만약 'ADD'가 실행된다면 물잇구럭을 보여주세요 🦭");
-    return --count;
-  } else {
-    return count;
-  }
+const createToDo = (toDo) => {
+  const li = document.createElement("li");
+  li.innerText = toDo;
+  ul.appendChild(li);
 };
 
-const countStore = createStore(reducer); // data의 store을 create하고
-
-const onChange = () => {
-  number.innerText = countStore.getState();
+const onSubmit = (e) => {
+  e.preventDefault();
+  const toDo = input.value;
+  input.value = "";
+  createToDo(toDo);
 };
 
-countStore.subscribe(onChange);
-
-const handleAdd = () => {
-  countStore.dispatch({ type: "ADD" });
-};
-
-const handleMinus = () => {
-  countStore.dispatch({ type: "MINUS" });
-};
-
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+form.addEventListener("submit", onSubmit);
