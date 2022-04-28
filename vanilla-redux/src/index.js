@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import Tag from "./Tag";
 
 const form = document.querySelector("form");
 const input = document.querySelector("input");
@@ -83,5 +84,7 @@ const onSubmit = (e) => {
   // createToDo(toDo);
   dispatchAddTodo(toDo);
 };
-
+<div>
+  <Tag />
+</div>;
 form.addEventListener("submit", onSubmit);
